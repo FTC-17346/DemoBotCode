@@ -8,6 +8,8 @@ import com.qualcomm.robotcore.hardware.ServoImplEx;
 public class DemoBotHardware {
     private OpMode myOpMode;
 
+    private double leftPowerValue;
+    private double rightPowerValue;
     public DcMotorEx frontLeft;
     public DcMotorEx frontRight;
     public DcMotorEx backLeft;
@@ -48,7 +50,7 @@ public class DemoBotHardware {
     public void drive(double forward, double turn) {
         double leftPower  = forward + turn;
         double rightPower = forward - turn;
-
+        setLeftPower(leftPower);
         double max = Math.max(Math.abs(leftPower), Math.abs(rightPower));
         if (max > 1.0)
         {
@@ -57,6 +59,22 @@ public class DemoBotHardware {
         }
 
         setDrivePower(leftPower, rightPower);
+
+    }
+
+    public void setLeftPower(double leftPower){
+        this.leftPowerValue = leftPower;
+    }
+
+    public double getLeftPower(){
+        return leftPowerValue;
+    }
+
+    public void setRightPower(double rightPower){
+        this.rightPowerValue = rightPower;
+    }
+    public double getRightPower(){
+        return rightPowerValue;
     }
 
     public void setDrivePower(double leftPower, double rightPower) {
